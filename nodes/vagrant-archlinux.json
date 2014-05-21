@@ -1,0 +1,7 @@
+{
+  "run_list":[
+    "recipe[essentials]",
+    "recipe[raspi_camera_server]"
+    //"recipe[mjpg-streamer]"
+  ]
+}
