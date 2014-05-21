@@ -13,7 +13,12 @@ deploy_revision '/usr/local/raspi_camera_server' do
   environment "RAILS_ENV" => "development"
   action :deploy
   before_restart do
-    `cd /usr/local/raspi_camera_server && bundle install --path ./vendor/bundle`  
+    bash "bundle install" do
+      cwd release_path
+      code <<-BASHCODE
+        bundle install --path=./vendor/bundle
+      BASHCODE
+    end
   end
   restart_command "touch /tmp/restart.txt"
 end
