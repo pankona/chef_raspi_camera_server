@@ -8,16 +8,20 @@
 #
 
 bash 'after_sync' do
+  user 'aka'
+  group 'aka'
   action :nothing
   flags '-x'
   code <<-__EOL__
-    cd /usr/local/mjpg-streamer/mjpg-streamer-experimental
+    cd /home/aka/mjpg-streamer/mjpg-streamer-experimental
     make
-    make install
+    sudo make install
   __EOL__
 end
 
-git '/usr/local/mjpg-streamer' do
+git '/home/aka/mjpg-streamer' do
+  user 'aka'
+  group 'aka'
   action :sync
   repository 'https://github.com/jacksonliam/mjpg-streamer.git'
   notifies :run, 'bash[after_sync]'
